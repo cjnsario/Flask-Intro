@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for
+#use pip install flask-sqlalchemy==2.5.1
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
