@@ -1,9 +1,38 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
-{% endblock%}
+<title>Taskmaster</title>
+{% endblock %}
 
 {% block body %}
-<h1>Flask Template</h1>
-{% endblock%}
+<div class="content">
+  <h1 style='text-align: center' align="center">Taskmaster</h1>
+  {% if tasks|length < 1 %}
+  <h4 style='text-align: center' align="center">There are no tasks. Create one below.</h4>
+
+  {% else %}
+  <table border="1" align="center" style="width:30%">
+    <tr>
+      <th>Task</th>
+      <th>Added</th>
+      <th>Actions</th>
+    </tr>
+    {% for task in tasks%}
+      <tr>
+        <td>{{ task.content }}</td>
+        <td>{{ task.date_created.date() }}</td>
+        <td align="center">
+          <a href="/delete/{{task.id}}">Delete</a>
+          <br>
+          <a href="/update/{{task.id}}">Update</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+  <form action="/" method="POST" align="center">
+    <input type="text" name="content" id="content">
+    <input type="submit" value="Add Task">
+  </form>
+</div>
+{% endblock %}
